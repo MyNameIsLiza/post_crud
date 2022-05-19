@@ -1,5 +1,5 @@
 import {useCallback, useState} from "react";
-import {addPostFx} from "../store";
+import {addPostFx, editPostFx, replacePostFx} from "../store";
 import Router from "next/router";
 
 export default function AddEditForm({data = {}}) {
@@ -7,7 +7,9 @@ export default function AddEditForm({data = {}}) {
 
     const submitForm = useCallback((e) => {
         e.preventDefault();
-        addPostFx(post);
+        if(!post.id){
+            addPostFx(post);
+        }
         Router.push('/posts');
     }, [post]);
 
@@ -25,8 +27,14 @@ export default function AddEditForm({data = {}}) {
                 setPost({...post, body: e.target.value})}/>
         </label>
         {post.id ? <>
-            <button>Edit</button>
-            <button>Replace</button>
+            <button onClick={() => {
+                editPostFx(post);
+            }
+            }>Edit</button>
+            <button onClick={() => {
+                replacePostFx(post);
+            }
+            }>Replace</button>
         </> : <button type='submit'>Submit</button>}
     </form>
 }

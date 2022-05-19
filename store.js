@@ -25,11 +25,33 @@ const addPostFx = createEffect(async (post) => {
     return await response.json();
 });
 
+const editPostFx = createEffect(async (post) => {
+    const response = await fetch(`${url}/${post.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(post),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        }
+    });
+    return await response.json();
+});
+
+const replacePostFx = createEffect(async (post) => {
+    const response = await fetch(`${url}/${post.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(post),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        }
+    });
+    return await response.json();
+});
+
 const $posts = createStore([])
     .on(getPostsFx.doneData, (list, res) => {
         return [...res]
     })
-    .on(deletePostFx, (list, id) => {
+    .on(deletePostFx.doneData, (list, id) => {
         const shallowList = [...list];
         const index = shallowList.findIndex((item) => item.id === id);
         if (index !== -1) {
@@ -40,5 +62,21 @@ const $posts = createStore([])
     .on(addPostFx.doneData, (list, res) => {
         return [...list, res]
     })
+    .on(editPostFx.doneData, (list, post) => {
+        const shallowList = [...list];
+        const index = shallowList.findIndex((item) => item.id === post.id);
+        if (index !== -1) {
+            shallowList[index] = post;
+        }
+        return shallowList;
+    })
+    .on(replacePostFx.doneData, (list, post) => {
+        const shallowList = [...list];
+        const index = shallowList.findIndex((item) => item.id === post.id);
+        if (index !== -1) {
+            shallowList[index] = post;
+        }
+        return shallowList;
+    })
 
-export {$posts, getPostsFx, deletePostFx, addPostFx}
+export {$posts, getPostsFx, deletePostFx, addPostFx, editPostFx, replacePostFx}

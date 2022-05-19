@@ -37,7 +37,9 @@ function PostsPage() {
                             <td>{el.title}</td>
                             <td>{el.body}</td>
                             <td>
-                                <button>Edit</button>
+                                <button onClick={() => {
+                                    Router.push(`/posts/edit/${el.id}`);
+                                }}>Edit</button>
                             </td>
                             <td>
                                 <button onClick={() => {

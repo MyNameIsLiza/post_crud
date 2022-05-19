@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import {useStore} from 'effector-react';
-import {$posts, getPostsFx} from '../../store'
+import {$posts, getPostsFx, deletePostFx} from '../../store'
 
 function PostsPage() {
     const state = useStore($posts);
@@ -12,7 +12,7 @@ function PostsPage() {
     return (
         <>
             <h1>Posts</h1>
-
+            <button>Add post</button>
             {
                 state.length ? <table>
                     <thead>
@@ -36,7 +36,9 @@ function PostsPage() {
                                 <button>Edit</button>
                             </td>
                             <td>
-                                <button>Delete</button>
+                                <button onClick={() => {
+                                    deletePostFx(el.id)
+                                }}>Delete</button>
                             </td>
                         </tr>)}
                     </tbody>

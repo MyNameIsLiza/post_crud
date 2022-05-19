@@ -7,9 +7,24 @@ const getPostsFx = createEffect(async () => {
     return await response.json();
 });
 
+const deletePostFx = createEffect(async (id) => {
+    await fetch(`${url}/${id}`, {
+        method: 'DELETE',
+    });
+    return id;
+});
+
 const $posts = createStore([])
     .on(getPostsFx.doneData, (list, res) => {
         return [...res]
     })
+    .on(deletePostFx, (list, id) => {
+        const shallowList = [...list];
+        const index = shallowList.findIndex((item) => item.id === id);
+        if (index !== -1) {
+            shallowList.splice(index, 1);
+        }
+        return shallowList;
+    })
 
-export {$posts, getPostsFx}
+export {$posts, getPostsFx, deletePostFx}

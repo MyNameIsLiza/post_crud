@@ -9,12 +9,12 @@ export default function EditPostPage() {
     const state = useStore($posts);
     const post = state.find((el)=>+el.id===+id);
 
-    return <>
+    return <div className='content'>
         <h1>Edit post page</h1>
         <AddEditForm data={post}/>
         <button onClick={() => {
             Router.push('/posts');
         }}>Go to posts
         </button>
-    </>
+    </div>
 }

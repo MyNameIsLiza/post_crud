@@ -3,12 +3,12 @@ import Router from "next/router";
 
 export default function AddPostPage() {
 
-    return <>
+    return <div className='content'>
     <h1>Add post page</h1>
         <AddEditForm/>
         <button onClick={() => {
             Router.push('/posts');
         }}>Go to posts
         </button>
-    </>
+    </div>
 }

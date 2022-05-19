@@ -1,6 +1,7 @@
 import {useCallback, useState} from "react";
 import {addPostFx, editPostFx, replacePostFx} from "../store";
 import Router from "next/router";
+import styles from '../styles/Form.module.css'
 
 export default function AddEditForm({data = {}}) {
     const [post, setPost] = useState(data);
@@ -13,7 +14,7 @@ export default function AddEditForm({data = {}}) {
         Router.push('/posts');
     }, [post]);
 
-    return <form onSubmit={submitForm}>
+    return <form onSubmit={submitForm} className={styles.form}>
         <label>User id
             <input type="number" value={post.userId} onChange={(e) =>
                 setPost({...post, userId: e.target.value})}/>

@@ -11,7 +11,7 @@ function PostsPage() {
         }
     }, [])
     return (
-        <>
+        <div className='content'>
             <h1>Posts</h1>
             <button onClick={() => {
                 Router.push('/posts/add');
@@ -51,7 +51,7 @@ function PostsPage() {
                 </table> : <p>Posts are missing</p>
             }
 
-        </>
+        </div>
     )
 }
 

@@ -1,7 +1,15 @@
-import {createStore} from "effector";
+import {createStore, createEffect} from "effector";
 
 const url = 'https://jsonplaceholder.typicode.com/posts';
 
-const $posts = createStore([])
+const getPostsFx = createEffect(async () => {
+    const response = await fetch(`${url}`);
+    return await response.json();
+});
 
-export {$posts}
+const $posts = createStore([])
+    .on(getPostsFx.doneData, (list, res) => {
+        return [...res]
+    })
+
+export {$posts, getPostsFx}

@@ -1,6 +1,7 @@
 import {useEffect} from "react";
 import {useStore} from 'effector-react';
-import {$posts, getPostsFx, deletePostFx} from '../../store'
+import {$posts, getPostsFx, deletePostFx} from '../../store';
+import Router from "next/router";
 
 function PostsPage() {
     const state = useStore($posts);
@@ -12,7 +13,10 @@ function PostsPage() {
     return (
         <>
             <h1>Posts</h1>
-            <button>Add post</button>
+            <button onClick={() => {
+                Router.push('/posts/add');
+            }}>Add post
+            </button>
             {
                 state.length ? <table>
                     <thead>

@@ -14,6 +14,17 @@ const deletePostFx = createEffect(async (id) => {
     return id;
 });
 
+const addPostFx = createEffect(async (post) => {
+    const response = await fetch(`${url}`, {
+        method: 'POST',
+        body: JSON.stringify(post),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        }
+    });
+    return await response.json();
+});
+
 const $posts = createStore([])
     .on(getPostsFx.doneData, (list, res) => {
         return [...res]
@@ -26,5 +37,8 @@ const $posts = createStore([])
         }
         return shallowList;
     })
+    .on(addPostFx.doneData, (list, res) => {
+        return [...list, res]
+    })
 
-export {$posts, getPostsFx, deletePostFx}
+export {$posts, getPostsFx, deletePostFx, addPostFx}

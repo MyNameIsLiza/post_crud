@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import Router from "next/router";
+import { useRouter } from 'next/router';
 
 export default function Home() {
+    const router = useRouter();
+
     return (
         <div className={styles.container}>
             <Head>
@@ -15,7 +17,7 @@ export default function Home() {
                     Welcome to <a href="https://nextjs.org">Next.js!</a>
                 </h1>
                 <button onClick={() => {
-                    Router.push('/posts');
+                    router.push('/posts');
                 }}>Go to posts
                 </button>
             </main>

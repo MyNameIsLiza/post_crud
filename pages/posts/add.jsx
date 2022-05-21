@@ -1,13 +1,14 @@
 import AddEditForm from "../../components/AddEditForm.jsx";
-import Router from "next/router";
+import { useRouter } from 'next/router';
 
 export default function AddPostPage() {
+    const router = useRouter();
 
     return <div className='content'>
     <h1>Add post page</h1>
         <AddEditForm/>
         <button onClick={() => {
-            Router.push('/posts');
+            router.push('/posts');
         }}>Go to posts
         </button>
     </div>

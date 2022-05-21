@@ -1,7 +1,7 @@
 import {$posts} from '../../../store'
 import {useStore} from "effector-react";
 import AddEditForm from "../../../components/AddEditForm";
-import Router, {useRouter} from "next/router";
+import {useRouter} from "next/router";
 
 export default function EditPostPage() {
     const router = useRouter();
@@ -13,7 +13,7 @@ export default function EditPostPage() {
         <h1>Edit post page</h1>
         <AddEditForm data={post}/>
         <button onClick={() => {
-            Router.push('/posts');
+            router.push('/posts');
         }}>Go to posts
         </button>
     </div>

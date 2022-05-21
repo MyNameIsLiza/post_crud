@@ -1,17 +1,18 @@
 import {useCallback, useState} from "react";
 import {addPostFx, editPostFx, replacePostFx} from "../store";
-import Router from "next/router";
+import { useRouter } from 'next/router';
 import styles from '../styles/Form.module.css'
 
 export default function AddEditForm({data = {}}) {
     const [post, setPost] = useState(data);
+    const router = useRouter();
 
     const submitForm = useCallback((e) => {
         e.preventDefault();
         if(!post.id){
             addPostFx(post);
         }
-        Router.push('/posts');
+        router.push('/posts');
     }, [post]);
 
     return <form onSubmit={submitForm} className={styles.form}>

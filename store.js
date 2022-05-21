@@ -1,8 +1,10 @@
-import {createStore, createEffect} from "effector";
+import {createStore, createEffect, forward} from "effector";
+import {createGate} from "effector-react";
 
 const url = 'https://jsonplaceholder.typicode.com/posts';
 
 const getPostsFx = createEffect(async () => {
+    console.log('getPostsFx')
     const response = await fetch(`${url}`);
     return await response.json();
 });
@@ -77,6 +79,9 @@ const $posts = createStore([])
             shallowList[index] = post;
         }
         return shallowList;
-    })
+    });
 
-export {$posts, getPostsFx, deletePostFx, addPostFx, editPostFx, replacePostFx}
+const PostsGate = createGate();
+forward({from: PostsGate.state, to: getPostsFx})
+
+export {$posts, getPostsFx, deletePostFx, addPostFx, editPostFx, replacePostFx, PostsGate}

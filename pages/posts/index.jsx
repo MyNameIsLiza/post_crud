@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import {useList, useStore} from 'effector-react';
-import {$posts, getPostsFx, deletePostFx} from '../../store';
+import {$posts, deletePostFx, PostsGate} from '../../store';
 import {useRouter} from 'next/router';
 
 const PostsTable = () => {
@@ -48,7 +48,7 @@ function PostsPage() {
 
     useEffect(() => {
         if (!state.length) {
-            getPostsFx();
+            //getPostsFx();
         }
     }, [])
     return (
@@ -61,7 +61,7 @@ function PostsPage() {
             {
                 state.length ? <PostsTable/> : <p>Posts are missing</p>
             }
-
+            <PostsGate/>
         </div>
     )
 };

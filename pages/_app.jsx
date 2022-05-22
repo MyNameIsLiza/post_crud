@@ -1,7 +1,16 @@
+import NextNProgress from "nextjs-progressbar";
 import '../styles/globals.css'
-import { withHydrate } from "effector-next";
-import App from "next/app";
-
-const enhance = withHydrate();
-
-export default enhance(App);
+export default function MyApp({Component, pageProps}) {
+    return (
+        <>
+            <NextNProgress
+            color="#29D"
+            startPosition={0.3}
+            stopDelayMs={200}
+            height={3}
+            showOnShallow={true}
+        />
+            <Component {...pageProps}/>
+        </>
+    )
+}

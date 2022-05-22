@@ -13,7 +13,7 @@ export default function AddEditForm({data = {}}) {
             addPostFx(post);
         }
         router.push('/posts');
-    }, [post]);
+    }, [post, router]);
 
     return <form onSubmit={submitForm} className={styles.form}>
         <label>User id

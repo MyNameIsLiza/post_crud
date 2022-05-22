@@ -1,4 +1,3 @@
-import {useEffect} from "react";
 import {useList, useStore} from 'effector-react';
 import {$posts, deletePostFx, PostsGate} from '../../store';
 import {useRouter} from 'next/router';
@@ -46,11 +45,6 @@ function PostsPage() {
     const state = useStore($posts);
     const router = useRouter();
 
-    useEffect(() => {
-        if (!state.length) {
-            //getPostsFx();
-        }
-    }, [])
     return (
         <div className='content'>
             <h1>Posts</h1>

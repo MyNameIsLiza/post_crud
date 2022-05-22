@@ -4,7 +4,6 @@ import {createGate} from "effector-react";
 const url = 'https://jsonplaceholder.typicode.com/posts';
 
 const getPostsFx = createEffect(async () => {
-    console.log('getPostsFx')
     const response = await fetch(`${url}`);
     return await response.json();
 });
